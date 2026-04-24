@@ -1,18 +1,30 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
 app.use(cors()); // สำคัญมาก เพื่อแก้ปัญหา ERR_CONNECTION_REFUSED
 app.use(express.json());
 
+// API เดิมของเราเผื่อไว้ (เอาไว้ทดสอบได้)
 app.post('/api/preorder', (req, res) => {
   console.log("ได้รับออเดอร์ใหม่:", req.body);
-  
-  // ตรงนี้คือจุดที่คุณจะเชื่อมกับ n8n หรือบันทึกตกลง MongoDB
-  // ในช่วงแรกส่งสถานะ Success กลับไปก่อนเพื่อให้หน้าเว็บทำงานต่อได้
   res.status(201).json({ success: true, orderId: "AW-" + Date.now() });
 });
 
-app.listen(5000, () => {
-  console.log('Backend Server is running on http://localhost:5000');
+// ชี้เข้าหาโฟลเดอร์ dist ที่อยู่ใน anotherway-web
+const webDistPath = path.join(__dirname, '../anotherway-web/dist');
+
+// เสิร์ฟไฟล์ Static
+app.use(express.static(webDistPath));
+
+// สำหรับรับ Request หน้าเว็บ React ย่อยต่างๆ
+app.get('*', (req, res) => {
+  res.sendFile(path.join(webDistPath, 'index.html'));
+});
+
+// Hostinger มักจะเจาะจง PORT ใน process.env.PORT
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Unified Server is running on port ${PORT}`);
 });
