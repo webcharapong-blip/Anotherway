@@ -1,0 +1,51 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2.5rem;
+  background: linear-gradient(to bottom, rgba(10,10,8,.95), transparent);
+  backdrop-filter: blur(4px);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 0.8rem 1rem;
+  }
+}
+
+/* brand name keeps SOV_Rajbutri */
+.brand {
+  font-family: var(--font-brand);
+  font-size: 1.2rem;
+  letter-spacing: .08em;
+  color: var(--gold);
+  font-weight: 400;
+}
+
+@media (max-width: 480px) {
+  .brand {
+    font-size: 1rem;
+  }
+}
+
+/* everything else Inter */
+.tag {
+  font-family: var(--font-ui);
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  border: 1px solid rgba(201,169,110,.5);
+  padding: .3em .9em;
+  color: var(--gold);
+  border-radius: 2px;
+}

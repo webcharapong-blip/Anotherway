@@ -1,0 +1,240 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── BACKGROUND ── */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.posterBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: .18;
+  filter: grayscale(40%);
+}
+
+.heroGradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 35%, rgba(232,25,26,.06) 0%, transparent 65%),
+    linear-gradient(170deg, rgba(10,10,8,.3) 0%, var(--ink) 55%);
+  z-index: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(10,10,8,.55) 0%,
+    rgba(10,10,8,.3) 50%,
+    rgba(10,10,8,.85) 100%);
+  z-index: 2;
+}
+
+/* ── CONTENT ── */
+.heroContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 4rem 1.5rem;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* massive background branding */
+.giantWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-ui);
+  font-size: clamp(8rem, 25vw, 18rem);
+  font-weight: 900;
+  color: white;
+  opacity: 0.03;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: -1;
+  letter-spacing: -0.02em;
+}
+
+/* live badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--font-ui);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,169,110,.08);
+  border: 1px solid rgba(201,169,110,.25);
+  padding: .5rem 1.2rem;
+  border-radius: 999px;
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.badgeDot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #e8191a;
+  box-shadow: 0 0 12px #e8191a;
+  animation: blink 1.5s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+/* title */
+.title { 
+  line-height: 0.9; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1.2rem; 
+  margin-bottom: 1rem;
+}
+
+/* brand name – SOV_Rajbutri */
+.brandName {
+  font-family: var(--font-brand);
+  font-size: clamp(4rem, 15vw, 10rem);
+  font-weight: 400;
+  color: var(--cream);
+  letter-spacing: .02em;
+  filter: drop-shadow(0 0 30px rgba(245,240,230,0.15));
+  line-height: 1;
+}
+
+/* collection name – Inter */
+.collectionName {
+  font-family: var(--font-ui);
+  font-size: clamp(.8rem, 3vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
+.tagline {
+  font-family: var(--font-ui);
+  font-size: clamp(.7rem, 2vw, .95rem);
+  font-weight: 500;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: rgba(245,240,230,.5);
+  margin-top: 1.5rem;
+}
+
+.divider {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin: 1.8rem auto;
+  opacity: .5;
+}
+
+/* price pill */
+.pricePill {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  font-family: var(--font-ui);
+  font-size: .85rem;
+  font-weight: 500;
+  color: rgba(245,240,230,.65);
+  margin-bottom: 2.8rem;
+}
+.priceNum {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+.priceSep { color: rgba(245,240,230,.3); }
+
+/* CTA button */
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  background: var(--gold);
+  border: none;
+  color: var(--ink);
+  padding: .95rem 2.4rem;
+  font-family: var(--font-ui);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all .25s;
+}
+.ctaBtn:hover {
+  background: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(201,169,110,.25);
+}
+
+/* scroll hint */
+.scrollHint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-ui);
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .45em;
+  text-transform: uppercase;
+  color: rgba(201,169,110,.35);
+  z-index: 3;
+  animation: pulse 2.2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:.35} 50%{opacity:.8} }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero {
+    height: auto;
+    min-height: 100svh;
+    padding: 6rem 0 4rem;
+  }
+  .brandName {
+    margin-bottom: .5rem;
+  }
+  .divider {
+    margin: 1.2rem auto;
+  }
+  .badge {
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 0 1rem;
+  }
+  .ctaBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

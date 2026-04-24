@@ -1,0 +1,44 @@
+.footer {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  border-top: 1px solid rgba(201,169,110,.1);
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 3rem 1.5rem 2.5rem;
+  }
+}
+
+/* brand keeps SOV_Rajbutri */
+.brand {
+  font-family: var(--font-brand);
+  font-size: 1.5rem;
+  letter-spacing: .06em;
+  color: var(--gold);
+  margin-bottom: .4rem;
+  font-weight: 400;
+}
+
+/* everything else Inter */
+.tagline {
+  font-family: var(--font-ui);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(245,240,230,.25);
+  margin-bottom: 1.2rem;
+}
+.sub {
+  font-family: var(--font-ui);
+  font-size: .7rem;
+  color: rgba(245,240,230,.2);
+  letter-spacing: .08em;
+  margin-bottom: .3rem;
+}
+.contact {
+  font-family: var(--font-ui);
+  font-size: .75rem;
+  color: rgba(245,240,230,.35);
+}

@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Prompt:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@400;700&display=swap');
+
+/* SOV_Rajbutri – looks for local font first, then /public/fonts/ fallback */
+@font-face {
+  font-family: 'SOV_Rajbutri';
+  src: local('SOV_Rajbutri'),
+       local('SOV Rajbutri'),
+       url('/fonts/SOV_Rajbutri.woff2') format('woff2'),
+       url('/fonts/SOV_Rajbutri.ttf')   format('truetype');
+  font-display: swap;
+}
+
+/* ─── DESIGN TOKENS ─── */
+:root {
+  --ink:       #0a0a08;
+  --cream:     #f5f0e6;
+  --gold:      #c9a96e;
+  --gold-d:    #8b6914;
+  --red:       #e8191a;
+  --white:     #fdfaf4;
+
+  /* brand name only – SOV_Rajbutri (Logo font) */
+  --font-brand: 'SOV_Rajbutri', 'Noto Serif Thai', serif;
+  /* everything else – Prompt (Thai) & Inter (English) */
+  --font-ui:    'Prompt', 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html  { scroll-behavior: smooth; }
+body  { background: var(--ink); color: var(--cream); font-family: var(--font-ui); overflow-x: hidden; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--gold-d); border-radius: 2px; }
+
+/* NOISE OVERLAY */
+.noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: .03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+/* SHARED BUTTON */
+.order-btn {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--gold);
+  border: none;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all .3s;
+  position: relative;
+  overflow: hidden;
+}
+.order-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background .2s;
+}
+.order-btn:hover::after { background: rgba(255,255,255,.12); }
+.order-btn:disabled     { opacity: .5; cursor: not-allowed; }
+.order-btn.big          { font-size: 1rem; padding: 1.15rem; }
+
+/* SHARED ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
