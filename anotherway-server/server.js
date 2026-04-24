@@ -3,28 +3,37 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-app.use(cors()); // สำคัญมาก เพื่อแก้ปัญหา ERR_CONNECTION_REFUSED
-app.use(express.json());
-
-// API เดิมของเราเผื่อไว้ (เอาไว้ทดสอบได้)
-app.post('/api/preorder', (req, res) => {
-  console.log("ได้รับออเดอร์ใหม่:", req.body);
-  res.status(201).json({ success: true, orderId: "AW-" + Date.now() });
+process.on('uncaughtException', function (err) {
+  console.error('Caught exception: ', err);
 });
 
-// ชี้เข้าหาโฟลเดอร์ dist ที่อยู่ใน anotherway-server (ตัวมันเอง)
-const webDistPath = path.join(__dirname, 'dist');
+try {
+  app.use(cors()); 
+  app.use(express.json());
 
-// เสิร์ฟไฟล์ Static
-app.use(express.static(webDistPath));
+  // API เดิม (เผื่อทดสอบ)
+  app.post('/api/preorder', (req, res) => {
+    res.status(201).json({ success: true, orderId: "AW-" + Date.now() });
+  });
 
-// สำหรับรับ Request หน้าเว็บ React ย่อยต่างๆ
-app.get('*', (req, res) => {
-  res.sendFile(path.join(webDistPath, 'index.html'));
-});
+  // ชี้ไปยังโฟลเดอร์ dist เสมอ ไม่ว่ารันจากที่ไหน
+  const webDistPath = path.join(__dirname, 'dist');
+  app.use(express.static(webDistPath));
 
-// Hostinger มักจะเจาะจง PORT ใน process.env.PORT
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Unified Server is running on port ${PORT}`);
-});
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(webDistPath, 'index.html'), err => {
+      if (err) res.status(500).send("Error loading index.html: " + err.message);
+    });
+  });
+
+  const PORT = process.env.PORT || 5000;
+  
+  // Hostinger's Node (Passenger) typically works best without explicitly specifying the host,
+  // or by allowing it to use the socket passed in process.env.PORT
+  app.listen(PORT, (err) => {
+    if (err) console.error("Error starting server:", err);
+    console.log(`Server is running successfully on port ${PORT}`);
+  });
+} catch (error) {
+  console.error("Critical error during server setup:", error);
+}
