@@ -12,8 +12,8 @@ app.post('/api/preorder', (req, res) => {
   res.status(201).json({ success: true, orderId: "AW-" + Date.now() });
 });
 
-// ชี้เข้าหาโฟลเดอร์ dist ที่อยู่ใน anotherway-web
-const webDistPath = path.join(__dirname, '../anotherway-web/dist');
+// ชี้เข้าหาโฟลเดอร์ dist ที่อยู่ใน anotherway-server (ตัวมันเอง)
+const webDistPath = path.join(__dirname, 'dist');
 
 // เสิร์ฟไฟล์ Static
 app.use(express.static(webDistPath));
