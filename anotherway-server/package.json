@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "postinstall": "echo \"Skipping build, files already present.\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
